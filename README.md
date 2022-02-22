@@ -18,28 +18,30 @@
 
 ## Installing - 專案安裝流程
 
-1. 使用終端機 (Terminal) 複製此專案至本機電腦
+1. 確認本地端已安裝 node.js 與 npm
+
+2. 使用終端機 (Terminal) 複製此專案至本機電腦
 
 ```
 git clone https://github.com/Kate-Chu/Restaurant_List.git
 ```
 
-2. 開啟終端機，進入存放此專案的資料夾
+3. 開啟終端機，進入存放此專案的資料夾
 
 ```
 cd restaurantList
 ```
 
-3. 啟動伺服器，執行 app.js 檔案
+4. 啟動伺服器，執行 app.js 檔案
 
 ```
 nodemon app.js
 ```
 
-4. 當終端機出現以下字樣，表示伺服器與資料庫已啟動並成功連結
+5. 當終端機出現以下字樣，表示伺服器與資料庫已啟動並成功連結
 
 ```
 Express is listening on localhost:3000
 ```
 
-5. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或 (MacOS 系統) 在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
+6. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或 (MacOS 系統) 在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
