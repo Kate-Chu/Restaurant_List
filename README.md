@@ -18,13 +18,13 @@
 
 ## Installing - 專案安裝流程
 
-1. 使用終端機複製此專案至本機電腦
+1. 使用終端機 (Terminal) 複製此專案至本機電腦
 
 ```
 git clone https://github.com/Kate-Chu/Restaurant_List.git
 ```
 
-2. 開啟終端機(Terminal)，進入存放此專案的資料夾
+2. 開啟終端機，進入存放此專案的資料夾
 
 ```
 cd restaurantList
