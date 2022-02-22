@@ -39,5 +39,5 @@ app.get("/search", (req, res) => {
 
 // 監聽 localhost:3000
 app.listen(port, (req, res) => {
-  console.log(`Express is listening on localhost:${port}`);
+  console.log(`Express is listening on http://localhost:${port}`);
 });
