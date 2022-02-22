@@ -19,9 +19,22 @@ app.get("/restaurants/:id", (req, res) => {
   const restaurant = restaurantList.results.find(
     (restaurant) => restaurant.id.toString() === req.params.id
   );
-  console.log(restaurant);
 
   res.render("restaurant_intro", { restaurant });
+});
+
+// 搜尋功能
+app.get("/search", (req, res) => {
+  const restaurant = restaurantList.results.filter((restaurant) => {
+    return (
+      restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase()) ||
+      restaurant.category
+        .toLowerCase()
+        .includes(req.query.keyword.toLowerCase())
+    );
+  });
+
+  res.render("index", { restaurant, keyword: req.query.keyword });
 });
 
 // 監聽 localhost:3000
