@@ -42,4 +42,4 @@ nodemon app.js
 Express is listening on localhost:3000
 ```
 
-5. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
+5. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或 (MacOS 系統) 在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
