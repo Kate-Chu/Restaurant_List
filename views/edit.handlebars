@@ -1,0 +1,64 @@
+<h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto mb-5">
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fa fa-cutlery pr-2"></i>
+          類別：
+        </span>
+        <input type="text" value="{{restaurant.category}}" />
+      </p>
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fa fa-map-marker pr-2"></i>
+          地址：
+        </span>
+        <input type="text" value="{{restaurant.location}}" class="w-50" />
+      </p>
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fa fa-location-arrow pr-2"></i>
+          Google Map：
+        </span>
+        <input type="text" value="{{restaurant.google_map}}" class="w-75" />
+      </p>
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fa fa-phone pr-2"></i>
+          電話：
+        </span>
+        <input type="text" value="{{restaurant.phone}}" />
+
+      </p>
+
+      <p class="mb-2 d-flex align-items-start">
+        <span class="text-secondary">
+          <i class="fa fa-commenting pr-1"></i>
+          餐廳敘述：
+        </span>
+        <textarea type="text" class="w-75">{{restaurant.description}}</textarea>
+      </p>
+
+      <p class="mb-4">
+        <span class="text-secondary">
+          <i class="fa fa-picture-o pr-2"></i>
+          圖片：
+        </span>
+        <input type="text" value="{{restaurant.image}}" class="w-75" />
+      </p>
+
+      <form
+        action="/restaurant/:id/edit"
+        method="post"
+        class="d-flex justify-content-center"
+      >
+        <button type="submit" class="btn btn-info">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

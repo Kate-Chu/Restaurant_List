@@ -37,6 +37,15 @@ app.get("/search", (req, res) => {
   res.render("index", { restaurant, keyword: req.query.keyword });
 });
 
+// 編輯頁面
+app.get("/restaurants/:id/edit", (req, res) => {
+  const restaurant = restaurantList.results.find(
+    (restaurant) => restaurant.id.toString() === req.params.id
+  );
+
+  res.render("edit", { restaurant });
+});
+
 // 監聽 localhost:3000
 app.listen(port, (req, res) => {
   console.log(`Express is listening on http://localhost:${port}`);
