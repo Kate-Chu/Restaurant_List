@@ -13,8 +13,9 @@
 
 1. Node.js v16.13.1
 2. Express v4.16.4
-3. Express-Handlebars v3.0.0
+3. Express-Handlebars v6.0.3
 4. Node-sass v7.0.1
+5. Mongoose v6.2.4
 
 ## Installing - 專案安裝流程
 
