@@ -28,11 +28,11 @@
 <!-- restaurant list -->
 <div class="container pt-5 pb-5">
   <div class="row mx-auto card-columns d-flex flex-wrap justify-content-around">
-    {{#each restaurant}}
+    {{#each item}}
       <div
         class="wrapper d-flex align-items-end flex-column col-10 col-sm-5 col-md-3 p-0 m-1"
       >
-        <a href="/restaurants/{{this.id}}" class="text-secondary w-100">
+        <a href="/restaurants/{{this._id}}" class="text-secondary w-100">
           <div class="card mb-3">
             <img
               class="card-img-top"
@@ -55,12 +55,13 @@
           </div>
         </a>
         <div class="edit-wrapper mb-4 d-flex align-items-center">
-          <a class="text-info" href="./restaurants/{{this.id}}/edit">Edit</a>
-          <a class="text-info" href="./restaurants/{{this.id}}">Detail</a>
+          <a class="text-info" href="./restaurants/{{this._id}}/edit">Edit</a>
+          <a class="text-info" href="./restaurants/{{this._id}}">Detail</a>
           <form
-            action="./restaurants/{{this.id}}/delete"
+            action="./restaurants/{{this._id}}/delete"
             method="POST"
             style="display: inline;"
+            class="mb-0"
           ><button
               type="submit"
               class="btn btn-info btn-sm"
@@ -68,5 +69,16 @@
         </div>
       </div>
     {{/each}}
+    <div
+      class="wrapper d-flex justify-content-center align-items-center col-10 col-sm-5 col-md-3 p-0 m-1"
+    >
+      <a
+        href="/restaurants/create"
+        class="text-secondary d-flex flex-column align-items-center text-decoration-none fs-2 opacity"
+      >
+        <i class="fa fa-plus-circle add-icon mb-2" aria-hidden="true"></i>
+        <p>新增餐廳</p>
+      </a>
+    </div>
   </div>
 </div>

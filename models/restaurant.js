@@ -22,6 +22,7 @@ const restaurantSchema = new Schema({
   },
   location: {
     type: String,
+    required: true,
   },
   phone: {
     type: String,
@@ -35,7 +36,7 @@ const restaurantSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
+
   },
 });
 

@@ -1,13 +1,12 @@
-<h1 class="mb-1 restaurant-show-title">{{item.name}}</h1>
+<h1 class="mb-1 restaurant-show-title">New Restaurant</h1>
 <div class="container">
   <div class="row">
     <div class="col-10 col-md-10 mx-auto mb-5">
 
       <form
-        action="/restaurants/{{item._id}}/edit"
+        action="/restaurants/create"
         method="POST"
         class="d-flex flex-column justify-content-center needs-validation"
-        novalidate
       >
         <p class="mb-3">
           <span class="text-secondary">
@@ -19,11 +18,8 @@
             class="form-control mt-2"
             name="name"
             value="{{item.name}}"
-            required
+            require
           />
-          <div class="valid-feedback">
-            Looks good!
-          </div>
         </p>
 
         <p class="mb-3">
@@ -49,7 +45,7 @@
             name="location"
             value="{{item.location}}"
             class="form-control mt-2"
-            required
+            require
           />
         </p>
 
@@ -76,7 +72,7 @@
             type="text"
             value="{{item.phone}}"
             class="form-control mt-2"
-            required
+            require
           />
 
         </p>
@@ -103,7 +99,7 @@
             type="text"
             value="{{item.image}}"
             class="form-control mt-2"
-            required
+            require
           />
         </p>
 
