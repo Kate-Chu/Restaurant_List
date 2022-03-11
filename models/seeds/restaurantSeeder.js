@@ -14,6 +14,6 @@ db.once("open", () => {
   console.log("restaurantSeeder.js: MongoDB connected!");
 
   restaurantList.results.forEach((restaurant) => {
-    Restaurants.create(restaurantList.results);
+    Restaurants.create(restaurant);
   });
 });
