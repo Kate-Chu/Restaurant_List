@@ -44,9 +44,10 @@
       <div
         class="edit-wrapper mb-4 d-flex align-items-center justify-content-center"
       >
+        <a class="text-info" href="/">Home</a>
         <a class="text-info" href="/restaurants/{{item._id}}/edit">Edit</a>
         <form
-          action="/{{item._id}}/delete"
+          action="/restaurants/{{item._id}}/delete"
           method="POST"
           style="display: inline;"
           class="mb-0"

@@ -4,106 +4,146 @@
     <div class="col-10 col-md-10 mx-auto mb-5">
 
       <form
-        action="/restaurants/create"
+        action="/restaurants"
         method="POST"
         class="d-flex flex-column justify-content-center needs-validation"
       >
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-building pr-2"></i>
-            餐廳名稱：
-          </span>
-          <input
-            type="text"
-            class="form-control mt-2"
-            name="name"
-            value="{{item.name}}"
-            require
-          />
-        </p>
+        <div class="row row-1">
+          <p class="mb-3 col-8">
+            <span class="text-secondary">
+              <i class="fa fa-building pr-2"></i>
+              餐廳名稱：<span class="text-danger">*</span>
+            </span>
+            <input
+              type="text"
+              class="form-control mt-2"
+              name="name"
+              style="display: inline;"
+              placeholder="必填欄位"
+              required
+            />
+          </p>
 
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-cutlery pr-2"></i>
-            類別：
-          </span>
-          <input
-            class="form-control mt-2"
-            type="text"
-            name="category"
-            value="{{item.category}}"
-          />
-        </p>
+          <p class="mb-3 col-4">
+            <span class="text-secondary">
+              <i class="fa fa-star-half-o pr-2" aria-hidden="true"></i>
+              評分：
+            </span>
+            <input
+              id="rating"
+              name="rating"
+              type="number"
+              min="0"
+              max="5"
+              class="form-control mt-2"
+              placeholder="0~5&#9733"
+            />
+          </p>
 
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-map-marker pr-2"></i>
-            地址：
-          </span>
-          <input
-            type="text"
-            name="location"
-            value="{{item.location}}"
-            class="form-control mt-2"
-            require
-          />
-        </p>
+        </div>
 
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-location-arrow pr-2"></i>
-            Google Map：
-          </span>
-          <input
-            name="google_map"
-            type="text"
-            value="{{item.google_map}}"
-            class="form-control mt-2"
-          />
-        </p>
+        <div class="row row-2">
+          <p class="mb-3 col-6">
+            <span class="text-secondary">
+              <i class="fa fa-cutlery pr-2"></i>
+              類別：
+            </span>
+            <select
+              class="form-control mt-2"
+              type="text"
+              name="category"
+              aria-label="Default select example"
+            >
+              <option value="日本料理" selected>日本料理</option>
+              <option value="義式餐廳">義式餐廳</option>
+              <option value="美式">美式料理</option>
+              <option value="美式">中式料理</option>
+              <option value="中東料理">中東料理</option>
+              <option value="咖啡">咖啡</option>
+              <option value="酒吧">酒吧</option>
+            </select>
+          </p>
 
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-phone pr-2"></i>
-            電話：
-          </span>
-          <input
-            name="phone"
-            type="text"
-            value="{{item.phone}}"
-            class="form-control mt-2"
-            require
-          />
+          <p class="mb-3 col-6">
+            <span class="text-secondary">
+              <i class="fa fa-phone pr-2"></i>
+              電話：<span class="text-danger">*</span>
+            </span>
+            <input
+              name="phone"
+              type="text"
+              class="form-control mt-2"
+              placeholder="必填欄位"
+              required
+            />
+          </p>
+        </div>
 
-        </p>
+        <div class="row row-3">
+          <p class="mb-3 col-7">
+            <span class="text-secondary">
+              <i class="fa fa-map-marker pr-2"></i>
+              地址：<span class="text-danger">*</span>
+            </span>
+            <input
+              type="text"
+              name="location"
+              class="form-control mt-2"
+              placeholder="必填欄位"
+              required
+            />
+          </p>
 
-        <p class="mb-3">
-          <span class="text-secondary">
-            <i class="fa fa-commenting pr-1"></i>
-            餐廳敘述：
-          </span>
-          <textarea
-            name="description"
-            type="text"
-            class="form-control mt-2"
-          >{{item.description}}</textarea>
-        </p>
+          <p class="mb-3 col-5">
+            <span class="text-secondary">
+              <i class="fa fa-location-arrow pr-2"></i>
+              Google Map：
+            </span>
+            <input
+              name="google_map"
+              type="text"
+              class="form-control mt-2"
+              placeholder="請輸入 Google_map 網址"
+            />
+          </p>
+        </div>
 
-        <p class="mb-5">
-          <span class="text-secondary">
-            <i class="fa fa-picture-o pr-2"></i>
-            圖片：
-          </span>
-          <input
-            name="image"
-            type="text"
-            value="{{item.image}}"
-            class="form-control mt-2"
-            require
-          />
-        </p>
+        <div class="row row-4">
+          <p class="mb-3 col-12">
+            <span class="text-secondary">
+              <i class="fa fa-commenting pr-1"></i>
+              餐廳敘述：
+            </span>
+            <textarea
+              name="description"
+              type="text"
+              class="form-control mt-2"
+            ></textarea>
+          </p>
+        </div>
 
-        <button type="submit" class="btn btn-info">Save</button>
+        <div class="row row-5">
+          <p class="mb-5 col-12">
+            <span class="text-secondary">
+              <i class="fa fa-picture-o pr-2"></i>
+              圖片：<span class="text-danger">*</span>
+            </span>
+            <input
+              name="image"
+              type="text"
+              class="form-control mt-2"
+              placeholder="必填欄位，請輸入圖片網址"
+              required
+            />
+          </p>
+        </div>
+
+        <div
+          class="edit-wrapper mb-4 d-flex align-items-center justify-content-center"
+        >
+          <a class="text-info" href="/">Home</a>
+          <button type="submit" class="btn btn-info">Save</button>
+        </div>
       </form>
     </div>
   </div>

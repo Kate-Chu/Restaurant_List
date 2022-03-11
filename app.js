@@ -32,11 +32,6 @@ app.get("/", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-// 增加餐廳
-app.get("/restaurants/create", (req, res) => {
-  res.render("create");
-});
-
 // 搜尋功能
 app.get("/search", (req, res) => {
   const keyword = req.query.keyword;
@@ -53,6 +48,22 @@ app.get("/search", (req, res) => {
       });
       res.render("index", { item: restaurant, keyword });
     })
+    .catch((error) => console.error(error));
+});
+
+// 增加餐廳
+app.get("/restaurants/create", (req, res) => {
+  RestaurantList.find()
+    .lean()
+    .then((restaurantList) => {
+      res.render("create");
+    });
+});
+
+app.post("/restaurants", (req, res) => {
+  const newRestaurant = req.body;
+  return RestaurantList.create(newRestaurant)
+    .then(() => res.redirect("/"))
     .catch((error) => console.error(error));
 });
 
@@ -84,11 +95,11 @@ app.post("/restaurants/:id/edit", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-// 刪除資料 待修
-app.delete("/todos/:id", (req, res) => {
+// 刪除資料
+app.post("/restaurants/:id/delete", (req, res) => {
   const id = req.params.id;
-  return Todo.findById(id)
-    .then((todo) => todo.remove())
+  return RestaurantList.findById(id)
+    .then((restaurant) => restaurant.remove())
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });

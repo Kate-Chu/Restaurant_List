@@ -9,6 +9,7 @@
         class="d-flex flex-column justify-content-center needs-validation"
         novalidate
       >
+
         <p class="mb-3">
           <span class="text-secondary">
             <i class="fa fa-building pr-2"></i>
@@ -73,7 +74,7 @@
           </span>
           <input
             name="phone"
-            type="text"
+            type="number"
             value="{{item.phone}}"
             class="form-control mt-2"
             required
@@ -90,6 +91,7 @@
             name="description"
             type="text"
             class="form-control mt-2"
+            style="height: 100px"
           >{{item.description}}</textarea>
         </p>
 
@@ -107,7 +109,12 @@
           />
         </p>
 
-        <button type="submit" class="btn btn-info">Save</button>
+        <div
+          class="edit-wrapper mb-4 d-flex align-items-center justify-content-center"
+        >
+          <a class="text-info" href="/restaurants/{{item._id}}">Back</a>
+          <button type="submit" class="btn btn-info">Save</button>
+        </div>
       </form>
     </div>
   </div>
