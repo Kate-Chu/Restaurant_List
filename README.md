@@ -1,8 +1,10 @@
 # 我的餐廳清單
 
 ![image](https://github.com/Kate-Chu/Restaurant_List/blob/main/public/imgs/restaurant_intro.jpg)
+
 ![image](https://github.com/Kate-Chu/Restaurant_List/blob/main/public/imgs/create.png)
-![image](https://github.com/Kate-Chu/Restaurant_List/blob/main/public/imgs/edit.jpg)
+
+![image](https://github.com/Kate-Chu/Restaurant_List/blob/main/public/imgs/edit.png)
 
 ## Features - 產品功能
 
