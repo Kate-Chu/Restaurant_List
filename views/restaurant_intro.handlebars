@@ -47,7 +47,7 @@
         <a class="text-info" href="/">Home</a>
         <a class="text-info" href="/restaurants/{{item._id}}/edit">Edit</a>
         <form
-          action="/restaurants/{{item._id}}/delete"
+          action="/restaurants/{{item._id}}?_method=DELETE"
           method="POST"
           style="display: inline;"
           class="mb-0"
