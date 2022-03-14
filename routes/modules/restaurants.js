@@ -2,6 +2,25 @@ const express = require("express");
 const router = express.Router();
 const RestaurantList = require("../../models/restaurant");
 
+// 搜尋功能
+router.get("/search", (req, res) => {
+  const keyword = req.query.keyword;
+
+  if (!keyword) res.redirect("/");
+  RestaurantList.find()
+    .lean()
+    .then((restaurantList) => {
+      const restaurant = restaurantList.filter((restaurant) => {
+        return (
+          restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          restaurant.category.toLowerCase().includes(keyword.toLowerCase())
+        );
+      });
+      res.render("index", { item: restaurant, keyword });
+    })
+    .catch((error) => console.error(error));
+});
+
 // 增加餐廳
 router.get("/create", (req, res) => {
   RestaurantList.find()

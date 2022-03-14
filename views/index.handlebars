@@ -1,9 +1,8 @@
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
+<div class="container search-bar function-bar">
+  <div class="row d-flex justify-content-around">
+    <div class="search-bar-inner col-4 mt-5">
+      <form action="/restaurants/search">
         <div class="input-group">
           <input
             type="text"
@@ -15,10 +14,52 @@
             aria-describedby="search-button"
           />
           <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i
+            <button class="btn btn-info" type="submit" id="search-button"><i
                 class="fa fa-search"
               ></i></button>
           </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="search-bar-inner col-4 mt-5">
+      <form action="/">
+        <div class="dropdown btn-group w-75">
+          <button
+            class="btn btn-info dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Sort
+          </button>
+          <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenu2">
+            <li><button
+                class="dropdown-item"
+                type="submit"
+                name="sort"
+                value="A -> Z"
+              >A -> Z</button></li>
+            <li><button
+                class="dropdown-item"
+                type="submit"
+                name="sort"
+                value="Z -> A"
+              >Z -> A</button></li>
+            <li><button
+                class="dropdown-item"
+                type="submit"
+                name="sort"
+                value="category"
+              >類別</button></li>
+            <li><button
+                class="dropdown-item"
+                type="submit"
+                name="sort"
+                value="location"
+              >地區</button></li>
+          </ul>
         </div>
       </form>
     </div>
@@ -69,16 +110,5 @@
         </div>
       </div>
     {{/each}}
-    <div
-      class="wrapper d-flex justify-content-center align-items-center col-10 col-sm-5 col-md-3 p-0 m-1"
-    >
-      <a
-        href="/restaurants/create"
-        class="text-secondary d-flex flex-column align-items-center text-decoration-none fs-2 opacity"
-      >
-        <i class="fa fa-plus-circle add-icon mb-2" aria-hidden="true"></i>
-        <p>新增餐廳</p>
-      </a>
-    </div>
   </div>
 </div>
