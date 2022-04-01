@@ -4,7 +4,7 @@ const User = require("../../models/user");
 const passport = require("passport");
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  return res.render("login");
 });
 
 router.post(

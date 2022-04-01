@@ -27,11 +27,27 @@
             我的餐廳清單
           </a>
 
-          <a
-            class="btn btn-info d-flex flex-column align-items-center text-decoration-none fs-2"
-            href="/restaurants/create"
-          >Create
-          </a>
+          {{#if isAuthenticated}}
+            <a
+              class="btn btn-info d-flex flex-column align-items-center text-decoration-none fs-2"
+              href="/restaurants/create"
+            >Create
+            </a>
+          {{else}}
+            <div class="d-flex">
+              <a
+                class="btn btn-info d-block text-decoration-none fs-2"
+                href="/users/login"
+              >Login
+              </a>
+              <a
+                class="btn btn-info text-decoration-none fs-2 ms-2"
+                style="margin-left: 10%;"
+                href="/users/register"
+              >Register
+              </a>
+            </div>
+          {{/if}}
         </div>
       </nav>
 

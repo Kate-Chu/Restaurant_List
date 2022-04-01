@@ -3,6 +3,6 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     }
-    res.redirecate("/users/login");
+    res.redirect("/users/login");
   },
 };
