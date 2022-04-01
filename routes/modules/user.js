@@ -15,6 +15,11 @@ router.post(
   })
 );
 
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/users/login");
+});
+
 router.get("/register", (req, res) => {
   res.render("register");
 });
