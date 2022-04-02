@@ -3,75 +3,82 @@ const router = express.Router();
 const RestaurantList = require("../../models/restaurant");
 
 // 搜尋功能
-router.get("/search", (req, res) => {
+router.get("/:id/search", async (req, res) => {
   const keyword = req.query.keyword;
+  const _id = req.params.id;
 
-  if (!keyword) res.redirect("/");
-  RestaurantList.find()
-    .lean()
-    .then((restaurantList) => {
-      const restaurant = restaurantList.filter((restaurant) => {
-        return (
-          restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          restaurant.category.toLowerCase().includes(keyword.toLowerCase())
-        );
-      });
-      res.render("index", { item: restaurant, keyword });
-    })
-    .catch((error) => console.error(error));
+  if (!keyword) return res.redirect("/");
+
+  const searchResult = await RestaurantList.find({
+    $or: [
+      { name: { $regex: keyword, $options: "i" } },
+      { category: { $regex: keyword, $options: "i" } },
+    ],
+    userId: _id,
+  }).lean();
+  return res.render("index", { items: searchResult, keyword, userId: _id });
 });
 
 // 增加餐廳
 router.get("/create", (req, res) => {
-  RestaurantList.find()
-    .lean()
-    .then((restaurantList) => {
-      res.render("create");
-    });
+  res.render("create");
 });
 
-router.post("/", (req, res) => {
-  const newRestaurant = req.body;
-  return RestaurantList.create(newRestaurant)
-    .then(() => res.redirect("/"))
-    .catch((error) => console.error(error));
+router.post("/", async (req, res) => {
+  const {
+    name,
+    rating,
+    category,
+    phone,
+    location,
+    google_map,
+    description,
+    image,
+  } = req.body;
+  const userId = req.user._id;
+
+  await RestaurantList.create({
+    name,
+    rating,
+    category,
+    phone,
+    location,
+    google_map,
+    description,
+    image,
+    userId,
+  });
+
+  return res.redirect("/");
 });
 
 // 餐廳單頁
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  return RestaurantList.findById(id)
-    .lean()
-    .then((restaurant) => res.render("restaurant_intro", { item: restaurant }))
-    .catch((error) => console.error(error));
+router.get("/:id", async (req, res) => {
+  const userId = req.user._id;
+  const _id = req.params.id;
+  const restaurantDetail = await RestaurantList.findOne({ _id, userId }).lean();
+  return res.render("restaurant_intro", { item: restaurantDetail });
 });
 
 // 編輯頁面
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   const id = req.params.id;
-  return RestaurantList.findById(id)
-    .lean()
-    .then((restaurant) => res.render("edit", { item: restaurant }))
-    .catch((error) => console.error(error));
+  const editRestaurant = await RestaurantList.findById(id).lean();
+  return res.render("edit", { item: editRestaurant });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   const id = req.params.id;
   const editItem = req.body;
-  return RestaurantList.findByIdAndUpdate(id, editItem)
-    .then(() => {
-      res.redirect(`/restaurants/${id}`);
-    })
-    .catch((error) => console.error(error));
+  await RestaurantList.findByIdAndUpdate(id, editItem);
+  return res.redirect(`/restaurants/${id}`);
 });
 
 // 刪除資料
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  return RestaurantList.findById(id)
-    .then((restaurant) => restaurant.remove())
-    .then(() => res.redirect("/"))
-    .catch((error) => console.log(error));
+  await RestaurantList.findById(id).remove();
+  return res.redirect("/");
 });
 
 module.exports = router;

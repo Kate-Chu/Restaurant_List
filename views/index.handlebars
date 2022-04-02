@@ -2,7 +2,7 @@
 <div class="container search-bar function-bar">
   <div class="row d-flex justify-content-around">
     <div class="search-bar-inner col-4 mt-5">
-      <form action="/restaurants/search">
+      <form action="/restaurants/{{userId}}/search">
         <div class="input-group">
           <input
             type="text"
@@ -69,7 +69,7 @@
 <!-- restaurant list -->
 <div class="container pt-5 pb-5">
   <div class="row mx-auto card-columns d-flex flex-wrap justify-content-around">
-    {{#each item}}
+    {{#each items}}
       <div
         class="wrapper d-flex align-items-end flex-column col-10 col-sm-5 col-md-3 p-0 m-1"
       >

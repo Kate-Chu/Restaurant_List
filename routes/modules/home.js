@@ -1,40 +1,37 @@
 const express = require("express");
 const router = express.Router();
-
-const RestaurantList = require("../../models/restaurant");
+const RestaurantData = require("../../models/restaurant");
 
 // 首頁
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   const sortSelect = req.query.sort;
+  const userId = req.user._id;
+  let sortedData;
 
   switch (sortSelect) {
     case "Z -> A":
-      RestaurantList.find()
-        .lean()
+      sortedData = await RestaurantData.find({ userId })
         .sort({ name: "desc" })
-        .then((restaurants) => res.render("index", { item: restaurants }))
-        .catch((error) => console.error(error));
-      break;
+        .lean();
+      return res.render("index", { items: sortedData, userId });
+
     case "category":
-      RestaurantList.find()
-        .lean()
+      sortedData = await RestaurantData.find({ userId })
         .sort({ category: "asc" })
-        .then((restaurants) => res.render("index", { item: restaurants }))
-        .catch((error) => console.error(error));
-      break;
+        .lean();
+      return res.render("index", { items: sortedData, userId });
+
     case "location":
-      RestaurantList.find()
-        .lean()
+      sortedData = await RestaurantData.find({ userId })
         .sort({ location: "asc" })
-        .then((restaurants) => res.render("index", { item: restaurants }))
-        .catch((error) => console.error(error));
-      break;
+        .lean();
+      return res.render("index", { items: sortedData, userId });
+
     default:
-      RestaurantList.find()
-        .lean()
+      sortedData = await RestaurantData.find({ userId })
         .sort({ name: "asc" })
-        .then((restaurants) => res.render("index", { item: restaurants }))
-        .catch((error) => console.error(error));
+        .lean();
+      return res.render("index", { items: sortedData, userId });
   }
 });
 
