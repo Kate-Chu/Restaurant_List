@@ -11,12 +11,14 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
+    failureFlash: true,
     failureRedirect: "/users/login",
   })
 );
 
 router.get("/logout", (req, res) => {
   req.logOut();
+  req.flash("success_msg", "logout successfully");
   res.redirect("/users/login");
 });
 
@@ -26,11 +28,30 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
+  const errors = [];
   const existUser = await User.findOne({ email });
+
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: "all fields required" });
+  }
+
+  if (password !== confirmPassword) {
+    errors.push({ message: "confirm password is different" });
+  }
+
+  if (errors.length) {
+    return res.render("register", {
+      errors,
+      name,
+      email,
+    });
+  }
+
   if (existUser) {
-    console.log("User already exists.");
+    req.flash("warning_msg", "this email already exists");
     return res.render("register", { name, email });
   }
+
   await User.create({ name, email, password });
   return res.redirect("/");
 });
