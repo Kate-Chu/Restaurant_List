@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const RestaurantList = require("../../models/restaurant");
+const User = require("../../models/user");
 
 // 搜尋功能
 router.get("/:id/search", async (req, res) => {
@@ -35,9 +36,10 @@ router.post("/", async (req, res) => {
     description,
     image,
   } = req.body;
-  const userId = req.user._id;
 
-  await RestaurantList.create({
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+  const newRestaurant = await RestaurantList.create({
     name,
     rating,
     category,
@@ -48,6 +50,8 @@ router.post("/", async (req, res) => {
     image,
     userId,
   });
+  user.restaurant = newRestaurant._id;
+  user.save();
 
   return res.redirect("/");
 });

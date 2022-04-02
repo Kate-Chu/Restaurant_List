@@ -17,6 +17,7 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  restaurant: [{ type: Schema.Types.ObjectId, ref: "restaurants" }],
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -31,12 +31,12 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    index: true,
-    required: true,
-  },
+  userId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);
