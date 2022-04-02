@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 router.get("/login", (req, res) => {
   return res.render("login");
@@ -52,7 +53,8 @@ router.post("/register", async (req, res) => {
     return res.render("register", { name, email });
   }
 
-  await User.create({ name, email, password });
+  const hashPassword = await bcrypt.hash(password, 10);
+  await User.create({ name, email, password: hashPassword });
   return res.redirect("/");
 });
 
