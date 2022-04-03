@@ -48,7 +48,7 @@ const addSeedRestaurant = async () => {
     newRestaurant.save();
     user1.restaurant.push(newRestaurant);
   }
-  user1.save();
+  await user1.save();
 
   for (let i = 3; i < 6; i++) {
     const newRestaurant = new Restaurant(seedResList[i]);
@@ -56,7 +56,7 @@ const addSeedRestaurant = async () => {
     newRestaurant.save();
     user2.restaurant.push(newRestaurant);
   }
-  user2.save();
+  await user2.save();
   // });
 };
 
