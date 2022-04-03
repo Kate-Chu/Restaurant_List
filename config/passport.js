@@ -11,38 +11,19 @@ module.exports = (app) => {
   passport.use(
     new LocalStrategy(
       { usernameField: "email", passReqToCallback: true },
-      (req, email, password, done) => {
-        User.findOne({ email })
-          .then((user) => {
-            if (!user) {
-              return done(null, false, { message: "email incorrect" });
-            }
-            return bcrypt.compare(password, user.password).then((isMatch) => {
-              if (!isMatch) {
-                return done(null, false, { message: "password incorrect" });
-              }
-              return done(null, user);
-            });
-          })
-          .catch((err) => done(err, false));
+      async (req, email, password, done) => {
+        const user = await User.findOne({ email });
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!user) {
+          return done(null, false, req.flash("error", "email incorrect"));
+        }
+        if (!isMatch) {
+          return done(null, false, req.flash("error", "password incorrect"));
+        }
+        return done(null, user);
       }
     )
-
-    // new LocalStrategy(
-    //   { usernameField: "email", passReqToCallback: true },
-    //   async (req, email, password, done) => {
-    //     const user = await User.findOne({ email });
-    //     const isMatch = await bcrypt.compare(password, user.password);
-
-    //     if (!user) {
-    //       return done(null, false, req.flash("error", "email incorrect"));
-    //     }
-    //     if (!isMatch) {
-    //       return done(null, false, req.flash("error", "password incorrect"));
-    //     }
-    //     return done(null, user);
-    //   }
-    // )
   );
 
   passport.use(

@@ -22,22 +22,18 @@ const SEED_USER = [
 ];
 
 const addSeedUser = async () => {
-  SEED_USER.forEach(async (user) => {
+  for await (let user of SEED_USER) {
     const hashPassword = await bcrypt.hash(user.password, 10);
-    const newUser = new User({
+    const newUser = await new User({
       name: user.name,
       email: user.email,
       password: hashPassword,
     });
     await newUser.save();
-  });
+  }
 };
 
 const addSeedRestaurant = async () => {
-  // Promise.all([
-  //   User.findOne({ email: "user1@example.com" }),
-  //   User.findOne({ email: "user2@example.com" }),
-  // ]).then(async () => {
   const user1 = await User.findOne({ email: "user1@example.com" });
   const user2 = await User.findOne({ email: "user2@example.com" });
   const seedResList = seedRestaurant.results;
@@ -57,10 +53,10 @@ const addSeedRestaurant = async () => {
     user2.restaurant.push(newRestaurant);
   }
   await user2.save();
-  // });
 };
 
-db.once("open", () => {
-  addSeedUser();
-  setTimeout(() => addSeedRestaurant(), 5000);
+db.once("open", async () => {
+  await addSeedUser();
+  await addSeedRestaurant();
+  process.exit();
 });
