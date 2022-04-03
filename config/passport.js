@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const FacebookStrategy = require("passport-facebook").Strategy;
-require("dotenv").config();
+// require("dotenv").config();
 
 module.exports = (app) => {
   app.use(passport.initialize());
@@ -13,11 +13,10 @@ module.exports = (app) => {
       { usernameField: "email", passReqToCallback: true },
       async (req, email, password, done) => {
         const user = await User.findOne({ email });
-        const isMatch = await bcrypt.compare(password, user.password);
-
         if (!user) {
           return done(null, false, req.flash("error", "email incorrect"));
         }
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
           return done(null, false, req.flash("error", "password incorrect"));
         }
