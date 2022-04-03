@@ -3,7 +3,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const FacebookStrategy = require("passport-facebook").Strategy;
-// require("dotenv").config();
 
 module.exports = (app) => {
   app.use(passport.initialize());
