@@ -13,15 +13,17 @@ const SEED_USER = [
     name: "User1",
     email: "user1@example.com",
     password: "12345678",
+    restaurant: [1, 2, 3],
   },
   {
     name: "User2",
     email: "user2@example.com",
     password: "12345678",
+    restaurant: [4, 5, 6],
   },
 ];
 
-const addSeedUser = async () => {
+const addSeedData = async () => {
   for await (let user of SEED_USER) {
     const hashPassword = await bcrypt.hash(user.password, 10);
     const newUser = await new User({
@@ -30,33 +32,19 @@ const addSeedUser = async () => {
       password: hashPassword,
     });
     await newUser.save();
-  }
-};
 
-const addSeedRestaurant = async () => {
-  const user1 = await User.findOne({ email: "user1@example.com" });
-  const user2 = await User.findOne({ email: "user2@example.com" });
-  const seedResList = seedRestaurant.results;
-
-  for (let i = 0; i < 3; i++) {
-    const newRestaurant = new Restaurant(seedResList[i]);
-    newRestaurant.userId = user1._id;
-    newRestaurant.save();
-    user1.restaurant.push(newRestaurant);
+    const seedResList = seedRestaurant.results;
+    for await (let index of user.restaurant) {
+      const newRestaurant = new Restaurant(seedResList[index - 1]);
+      newRestaurant.userId = newUser._id;
+      newRestaurant.save();
+      newUser.restaurant.push(newRestaurant);
+    }
+    await newUser.save();
   }
-  await user1.save();
-
-  for (let i = 3; i < 6; i++) {
-    const newRestaurant = new Restaurant(seedResList[i]);
-    newRestaurant.userId = user2._id;
-    newRestaurant.save();
-    user2.restaurant.push(newRestaurant);
-  }
-  await user2.save();
 };
 
 db.once("open", async () => {
-  await addSeedUser();
-  await addSeedRestaurant();
+  await addSeedData();
   process.exit();
 });
