@@ -32,8 +32,12 @@ router.post("/register", async (req, res) => {
   const errors = [];
   const existUser = await User.findOne({ email });
 
-  if (!name || !email || !password || !confirmPassword) {
+  if (!email || !password || !confirmPassword) {
     errors.push({ message: "all fields required" });
+  }
+
+  if (existUser) {
+    errors.push({ message: "email existed" });
   }
 
   if (password !== confirmPassword) {
