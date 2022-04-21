@@ -52,11 +52,6 @@ router.post("/register", async (req, res) => {
     });
   }
 
-  if (existUser) {
-    req.flash("warning_msg", "this email already exists");
-    return res.render("register", { name, email });
-  }
-
   const hashPassword = await bcrypt.hash(password, 10);
   await User.create({ name, email, password: hashPassword });
   return res.redirect("/");
